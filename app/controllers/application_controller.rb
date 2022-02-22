@@ -6,4 +6,9 @@ class ApplicationController < ActionController::API
     render json: { count: session[:count] }
   end
 
+  def auth
+    current_user = User.find_by(id: session[:user_id])
+  end
+
+
 end
