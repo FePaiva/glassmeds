@@ -1,7 +1,7 @@
-function Home() {
+function Home({setUser, user}) {
   return (
     <div >
-      Home page here.
+           ADD POSTS HERE 
     </div>
   );
 }
