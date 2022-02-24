@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.permit(:procedure, :date_of_procedure, :patient_cost, :insurance_cost, :invoice_date, :comments)
+    params.permit(:user_id, :facility_id, :procedure, :date_of_procedure, :date_of_invoice, :patient_cost, :insurance_cost, :comments)
   end
 
 

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 
@@ -9,7 +9,7 @@ import SearchBar from "./SearchBar";
             method: 'DELETE'
         })
         .then(setUser(''))
-        .then(navigate.push('/'))
+        .then(navigate('/'))
     }
 
     if (user) {
@@ -17,24 +17,22 @@ import SearchBar from "./SearchBar";
           <div>
             <SearchBar/>
               <div>
-                  <NavLink
-                      to="/" 
-                      exact
-                      > 
+                  <Link
+                      to="/"> 
                       {/* <img src={logo} alt="logo"/> add logo here */}
-                  </NavLink>
+                  </Link>
               </div>
           <nav>
               <ul>
                   <li>Welcome, {user.username}.</li>
-                  <li><NavLink
+                  <li><Link
                           to="/home"> 
                       Home
-                      </NavLink></li>
-                      <li><NavLink
+                      </Link></li>
+                      <li><Link
                           to="/generate-a-post"> 
                       Add MedCost
-                      </NavLink></li>
+                      </Link></li>
                   <li><button onClick={handleLogout}>Logout</button></li>
               </ul>
           </nav>
@@ -44,31 +42,31 @@ import SearchBar from "./SearchBar";
   
   return (
       <div>
-        {/* <SearchBar/> */}
+        <SearchBar/>
           <div>
-                  <NavLink
+                  <Link
                       to="/"> 
                       {/* <img src={logo} alt="logo"/> add logo here */}
-                  </NavLink>
+                  </Link>
               </div>
           <nav>
               <ul>
-                  <li><NavLink
+                  <li><Link
                           to="/home"> 
                       Home
-                      </NavLink></li>
-                  <li><NavLink
+                      </Link></li>
+                  {/* <li><NavLink
                           to="/generate-a-post"> 
                       Add MedCost
-                      </NavLink></li>
-                  <li><NavLink
+                      </NavLink></li> */}
+                  <li><Link
                           to="/login"> 
                       <button className="auth-button">Login</button>
-                      </NavLink></li>
-                  <li><NavLink
+                      </Link></li>
+                  <li><Link
                           to="/signup"> 
                       <button className="auth-button">Signup</button>
-                      </NavLink></li>
+                      </Link></li>
               </ul>
           </nav>
       </div>
