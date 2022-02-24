@@ -6,8 +6,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.create!(post_params)
-    render json: posts, status: :created
+    post = current_user.posts.create(post_params)
+    render json: post, status: :created
   end
 
   private

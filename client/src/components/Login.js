@@ -50,7 +50,7 @@ function Login() {
     <br/>
     <button>Login</button>
     </form>
-    <p>If you do not have an account, please<Link to="signup" replace> Signup here</Link> </p>
+    <p>If you do not have an account, please<Link to="/signup" replace> Signup here</Link> </p>
 
     
     </>

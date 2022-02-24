@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/home', to: 'posts#index'
+  get '/users/:id/posts/:postid', to: 'users#post'
+  get '/users/:id/posts', to: 'users#posts'
+
 
   # post '/users', to: 'users#create'
   
