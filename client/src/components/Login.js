@@ -46,12 +46,11 @@ function Login() {
       <input type="text" name="username" value={formData.username} onChange={handleChange}/>
     <br/>
       <label>Password</label>
-      <input type="password" name="password" value={formData.password}/>
+      <input type="password" name="password" value={formData.password} onChange={handleChange}/>
     <br/>
-    <button>Submit</button>
+    <button>Login</button>
     </form>
-    
-    <Link to="signup" replace> Signup if you do not have an account</Link>
+    <p>If you do not have an account, please<Link to="signup" replace> Signup here</Link> </p>
 
     
     </>

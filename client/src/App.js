@@ -73,14 +73,10 @@ function App() {
   return (
     <div className="App">
       <NavBar setUser={setUser} user={user}  />
-      {/* <SearchBar /> */}
-    <h1>Welcome to Glassmeds!</h1>
-       <p>Glassmeds' purpose is to bring more transparency to people who needs medical treatment and are not sure what to expect in terms of cost. </p> 
     <Routes> 
-      <Route path="/" element={user ? <Home setUser={setUser} user={user}/> : <Landing posts={filteredPosts} />}/>
+      <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts}/> : <Landing posts={filteredPosts} />}/>
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
-      <Route path='/login' element = {(!user) ? <Login setUser={setUser} /> : <div></div>} />
-      {/* <Route path="/" element = {(!currentUser) ? <Landing /> : <Home />}/> */}
+      <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts}/>}/>
     </Routes>
 
    

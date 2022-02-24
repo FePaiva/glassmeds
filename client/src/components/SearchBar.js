@@ -8,7 +8,6 @@ function SearchBar({handleSearch}) {
         placeholder="Search"
         id="search"
         onChange={handleSearch} />
-      {/* For the advanced deliverables: add a checkbox to allow sorting the planeteer */}
     </div>
   );
 }
