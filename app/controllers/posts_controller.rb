@@ -5,6 +5,10 @@ class PostsController < ApplicationController
     render json: posts
   end
 
+  def show
+    post = Post.find(params[:id]).to_json({only: :procedure})
+  end
+
   def create
     post = current_user.posts.create(post_params)
     render json: post, status: :created

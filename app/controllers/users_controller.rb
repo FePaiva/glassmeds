@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     before_action :authorize, only: [:show]
+
+    def index
+        users = User.all
+        render json: users
+      end
+
     def show
         if current_user
             render json: current_user, status: :ok

@@ -3,6 +3,13 @@ import { useParams } from "react-router-dom";
 
 function AddPostForm({handlePost, user, setUser, post}) {
   const [facilities, setFacilities] = useState ([])
+  const [procedures, setProcedures] = useState ([])
+
+  useEffect(() => {
+    fetch(`/posts/${procedures}`)
+      .then((r) => r.json())
+      .then(setProcedures);
+  }, []);
 
   useEffect(() => {
     fetch("/facilities")
@@ -71,6 +78,19 @@ function AddPostForm({handlePost, user, setUser, post}) {
         ))}
       </select>
 
+      <label htmlFor="procedure">Procedure:</label>
+      <select
+        id="procedure"
+        name="procedure"
+        value={formData.procedure}
+        onChange={handleChange}      >
+        <option value="">Select Procedure</option>
+        {procedures.map((procedure) => (
+          <option key={procedure.id} value={procedure.name}>
+            {procedure.procedure}
+          </option>
+        ))}
+      </select>
 
         {/* <input
           type="text"
@@ -80,14 +100,18 @@ function AddPostForm({handlePost, user, setUser, post}) {
           placeholder="Select facility ..."
         /> */}
         <br></br>
-        <label htmlFor="facility_id">Procedure:</label>
+        {/* <label htmlFor="facility_id">Procedure:</label>
         <input
           type="text"
           name="procedure"
           onChange={handleChange}
-          value={formData.procedure}
-          // placeholder="Select procedure ..."
-        />
+          value={formData.procedure} */}
+         {/* placeholder="Select procedure ..."
+        /> */}
+
+
+
+
         <br></br>
         <label htmlFor="facility_id">Procedure date:</label>
         <input

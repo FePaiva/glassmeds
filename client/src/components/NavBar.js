@@ -10,7 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
         .then(setUser(''))
         .then(navigate('/'))
     }
-
+    
+    console.log(user)
     if (user) {
       return (
           <div>
@@ -22,7 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
               </div>
           <nav>
              
-                  <h3>Welcome, {user.username}.</h3>
+                  <h2>Welcome, {user.username}.</h2>
                   <h1><Link
                           to="/"> 
                       Home
@@ -31,7 +32,13 @@ import { Link, useNavigate } from "react-router-dom";
                           to="/addpost"> 
                       Add MedCost
                       </Link></h1>
+                      <h1><Link
+                          to="/average"> 
+                      Check Average Cost
+                      </Link></h1>
                   <h1><button onClick={handleLogout}>Logout</button></h1>
+                  
+
              
           </nav>
       </div>
@@ -64,7 +71,10 @@ import { Link, useNavigate } from "react-router-dom";
                           to="/signup"> 
                       <button className="auth-button">Signup</button>
                       </Link></h1>
-            
+                      <h1><Link
+                          to="/average"> 
+                      Check Average Cost
+                      </Link></h1>
           </nav>
       </div>
   )

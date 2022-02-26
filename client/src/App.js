@@ -8,6 +8,7 @@ import Home from './components/Home';
 import { Routes, Route } from "react-router-dom";
 import AddPostForm from './components/AddPostForm'
 import SearchBar from "./components/SearchBar";
+import Average from "./components/Average";
 
 function App() {
   const [user, setUser ] = useState(null)
@@ -55,7 +56,7 @@ function App() {
         if(data.errors){
           setErrors(data.errors)
         } else {
-          setPosts([...posts,data])
+          setPosts([data,...posts])
         }
       })
   }
@@ -74,7 +75,8 @@ function App() {
   return (
     <div className="App">
       <NavBar setUser={setUser} user={user}  />
-      <SearchBar handleSearch={handleSearch}/>
+      <SearchBar handleSearch={handleSearch} setUser={setUser} user={user}/>
+      <Average  />
     <Routes> 
       <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts}/> : <Landing posts={filteredPosts} />}/>
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>

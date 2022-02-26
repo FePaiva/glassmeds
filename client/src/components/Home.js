@@ -1,10 +1,23 @@
-import React from "react";
+// import React from "react";
 import Post from './Post';
+import React, { useState, useEffect } from "react";
 
 
 function Home({setUser, user, posts}) {
 
 console.log("posts", posts)
+
+
+  // const [averageCost, setAverageCost] = useState([0]) 
+  // const [sumOfPatientCosts, setSumOfPatientCosts] = useState(0)
+  // const [numberOfPatientCosts, setNumberOfPatientCosts] = useState(0)
+
+  // {posts.map(post  => { 
+  //   setNumberOfPatientCosts(...numberOfPatientCosts += 1) 
+  //   setSumOfPatientCosts(...sumOfPatientCosts += post.patient_cost) 
+  // })}
+
+
   return (
     <div >
         <h1>Welcome to Glassmeds!</h1>
