@@ -19,5 +19,13 @@ class Post < ApplicationRecord
   #   pluck(:patient_cost)
   #   # Post.all.map(&:patient_cost)
   # end
+
+
+  #   def self.patient_cost
+  #   byebug
+  #   average(:patient_cost)
+  #   Post.all.map(&:patient_cost)
+  # end
+
   
 end

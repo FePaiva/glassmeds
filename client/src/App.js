@@ -56,7 +56,7 @@ function App() {
         if(data.errors){
           setErrors(data.errors)
         } else {
-          setPosts([data,...posts])
+          setPosts([...posts, data])
         }
       })
   }
@@ -81,7 +81,7 @@ function App() {
       <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts}/> : <Landing posts={filteredPosts} />}/>
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
       <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts}/>}/>
-      <Route path="/addpost" element={<AddPostForm setUser={setUser} user={user}handlePost={handlePost} errors={errors}/>} />
+      <Route path="/addpost" element={<AddPostForm setUser={setUser} posts={filteredPosts} user={user} handlePost={handlePost} errors={errors}/>} />
 
     </Routes>
 

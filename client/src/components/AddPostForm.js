@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function AddPostForm({handlePost, user, setUser, post}) {
+function AddPostForm({ posts, handlePost})
+// handlePost, user, setUser, post,
+{
   const [facilities, setFacilities] = useState ([])
   const [procedures, setProcedures] = useState ([])
+
+  console.log("FACILITIES:", facilities)
+  console.log("PROCEDURES:", procedures)
+
 
   useEffect(() => {
     fetch(`/posts/${procedures}`)
@@ -31,31 +37,35 @@ function AddPostForm({handlePost, user, setUser, post}) {
 
   function handleChange(event) {
     setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
+      ...formData,[event.target.name]: event.target.value,
     });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    handlePost(formData)
 
-    const addMedCost = {
-      ...formData,
-      user_id: id,
+    // const addMedCost = {
+    //   ...formData,
+    //   user_id: id,
       // facility_id: id,
     };
 
-    fetch(`/posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(addMedCost),
-    })
-      .then((r) => r.json())
-      .then(data => console.log(data));
-  }
+  //   fetch(`/posts`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(addMedCost),
+  //   })
+  //     .then((r) => r.json())
+  //     .then(addMedCost => {
+  //       setProcedures([addMedCost, ...posts]);
+  //     })
+  //     .then(data => console.log(data));
+  // }
     
+  // let uniquedata = [...new Set(facilities)]
 
   return (
     <div >
@@ -91,7 +101,6 @@ function AddPostForm({handlePost, user, setUser, post}) {
           </option>
         ))}
       </select>
-
         {/* <input
           type="text"
           name="facility"
