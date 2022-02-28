@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
 
 
   function NavBar({ user, setUser }) {
@@ -11,11 +10,11 @@ import SearchBar from "./SearchBar";
         .then(setUser(''))
         .then(navigate('/'))
     }
-
+    
+    console.log(user)
     if (user) {
       return (
           <div>
-            <SearchBar/>
               <div>
                   <Link
                       to="/"> 
@@ -23,18 +22,24 @@ import SearchBar from "./SearchBar";
                   </Link>
               </div>
           <nav>
-              <ul>
-                  <li>Welcome, {user.username}.</li>
-                  <li><Link
-                          to="/home"> 
+             
+                  <h2>Welcome, {user.username}.</h2>
+                  <h1><Link
+                          to="/"> 
                       Home
-                      </Link></li>
-                      <li><Link
-                          to="/generate-a-post"> 
+                      </Link></h1>
+                      <h1><Link
+                          to="/addpost"> 
                       Add MedCost
-                      </Link></li>
-                  <li><button onClick={handleLogout}>Logout</button></li>
-              </ul>
+                      </Link></h1>
+                      <h1><Link
+                          to="/average"> 
+                      Check Average Cost
+                      </Link></h1>
+                  <h1><button onClick={handleLogout}>Logout</button></h1>
+                  
+
+             
           </nav>
       </div>
       )
@@ -42,7 +47,6 @@ import SearchBar from "./SearchBar";
   
   return (
       <div>
-        <SearchBar/>
           <div>
                   <Link
                       to="/"> 
@@ -50,24 +54,27 @@ import SearchBar from "./SearchBar";
                   </Link>
               </div>
           <nav>
-              <ul>
-                  <li><Link
-                          to="/home"> 
+           
+                  <h1><Link
+                          to="/"> 
                       Home
-                      </Link></li>
+                      </Link></h1>
                   {/* <li><NavLink
                           to="/generate-a-post"> 
                       Add MedCost
                       </NavLink></li> */}
-                  <li><Link
+                  <h1><Link
                           to="/login"> 
                       <button className="auth-button">Login</button>
-                      </Link></li>
-                  <li><Link
+                      </Link></h1>
+                  <h1><Link
                           to="/signup"> 
                       <button className="auth-button">Signup</button>
-                      </Link></li>
-              </ul>
+                      </Link></h1>
+                      <h1><Link
+                          to="/average"> 
+                      Check Average Cost
+                      </Link></h1>
           </nav>
       </div>
   )

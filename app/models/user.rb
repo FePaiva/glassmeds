@@ -11,5 +11,13 @@ class User < ApplicationRecord
   # format: /\w+@\w+\.{1}[a-zA-Z]{2,}/, 
   # validates :password, presence: true, format: PASSWORD_REQUIREMENTS
 
+  # def total_cost
+  #   total_cost = self.procedures.map(&:cost){|p| p.patient_cost}
+  #   total_cost.sum
+  # end
+
+  # def self.most_expensive
+  #   self.all.max_by { |u| u.total_cost}
+  # end
 
 end

@@ -6,7 +6,9 @@ import Signup from './components/Signup';
 import Login from "./components/Login";
 import Home from './components/Home';
 import { Routes, Route } from "react-router-dom";
+import AddPostForm from './components/AddPostForm'
 import SearchBar from "./components/SearchBar";
+import Average from "./components/Average";
 
 function App() {
   const [user, setUser ] = useState(null)
@@ -18,7 +20,7 @@ function App() {
 
   function handleSearch (e) {
     const filteredPosts = posts.filter(post => {
-      return post.procedure.toLowerCase().includes(e.target.value.toLowerCase()) || post.facility_id.name.toLowerCase().includes(e.target.value.toLowerCase())
+      return post.procedure.toLowerCase().includes(e.target.value.toLowerCase()) || post.facility.name.toLowerCase().includes(e.target.value.toLowerCase())
     })
     setFilteredPosts(filteredPosts)
   }
@@ -54,7 +56,7 @@ function App() {
         if(data.errors){
           setErrors(data.errors)
         } else {
-          setPosts([...posts,data])
+          setPosts([data,...posts])
         }
       })
   }
@@ -73,10 +75,14 @@ function App() {
   return (
     <div className="App">
       <NavBar setUser={setUser} user={user}  />
+      <SearchBar handleSearch={handleSearch} setUser={setUser} user={user}/>
+      <Average  />
     <Routes> 
       <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts}/> : <Landing posts={filteredPosts} />}/>
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
       <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts}/>}/>
+      <Route path="/addpost" element={<AddPostForm setUser={setUser} user={user}handlePost={handlePost} errors={errors}/>} />
+
     </Routes>
 
    

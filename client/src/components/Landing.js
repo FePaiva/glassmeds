@@ -8,7 +8,6 @@ function Landing({posts}) {
          <p>IMPORTANT: The information you see here is for reference only. Glassmeds has no responsibility if the costs of your procedure is different from what is indicated here. Please communicate with your insurance provider and/or facility for confirmation about your final cost.</p>  
 
       <div>
-         POSTS HERE
          {posts.map(post => <Post post={post} key={post.id}/>)}
 
        </div>  
