@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all 
-    render json: posts
+    render json: posts.sort_by{|e| e[:procedure]}
   end
 
   # def average
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   private   
 
   def post_params
-    params.permit(:user_id, :facility_id, :procedure, :date_of_procedure, :date_of_invoice, :patient_cost, :insurance_cost, :comments)
+    params.require(:post).permit(:user_id, :facility_id, :procedure, :date_of_procedure, :date_of_invoice, :patient_cost, :insurance_cost, :comments)
   end
 
 

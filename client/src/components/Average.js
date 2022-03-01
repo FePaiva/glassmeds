@@ -35,6 +35,7 @@ console.log("unique procedures:", uniques)
       console.log("total:", total)
       let avg = total / filteredObject.length
       console.log("average:", avg)
+      setAverageCost(avg.toFixed(2));
 
 
       // let total = filteredObject.patient_cost.reduce((sum, curr) => sum + curr, 0)
@@ -103,7 +104,7 @@ console.log("unique procedures:", uniques)
       </select>
           </div>
         
-          average: {averageCost}
+          Average Patient Cost: $ {averageCost}
     </div>
   )
 }

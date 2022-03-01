@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function AddPostForm({ posts, handlePost})
-// handlePost, user, setUser, post,
 {
   const [facilities, setFacilities] = useState ([])
   const [procedures, setProcedures] = useState ([])
+  const uniques = procedures.map(procedure => procedure.procedure)
+  .filter((value, index, self) => self.indexOf(value) === index )
+// console.log("unique procedures:", uniques)
+  const uniqFacility = facilities.map(facility => facility.name).filter((value,index, self) => self.indexOf(value) === index)
+  console.log("unique facility:", uniqFacility)
 
   console.log("FACILITIES:", facilities)
   console.log("PROCEDURES:", procedures)
@@ -64,8 +68,6 @@ function AddPostForm({ posts, handlePost})
   //     })
   //     .then(data => console.log(data));
   // }
-    
-  // let uniquedata = [...new Set(facilities)]
 
   return (
     <div >
@@ -81,9 +83,9 @@ function AddPostForm({ posts, handlePost})
         value={formData.facility_id}
         onChange={handleChange}      >
         <option value="">Select Facility</option>
-        {facilities.map((facility) => (
-          <option key={facility.id} value={facility.id}>
-            {facility.name}
+        {uniqFacility.map((facility) => (
+          <option key={facility.id} value={facility.name}>
+            {facility}
           </option>
         ))}
       </select>
@@ -95,9 +97,9 @@ function AddPostForm({ posts, handlePost})
         value={formData.procedure}
         onChange={handleChange}      >
         <option value="">Select Procedure</option>
-        {procedures.map((procedure) => (
-          <option key={procedure.id} value={procedure.name}>
-            {procedure.procedure}
+        {uniques.map((procedure) => (
+          <option key={procedure} value={procedure}>
+            {procedure}
           </option>
         ))}
       </select>

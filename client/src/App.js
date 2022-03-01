@@ -76,8 +76,10 @@ function App() {
     <div className="App">
       <NavBar setUser={setUser} user={user}  />
       <SearchBar handleSearch={handleSearch} setUser={setUser} user={user}/>
-      <Average  />
+      
     <Routes> 
+
+      <Route path='/average' element = {<Average/>} />
       <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts}/> : <Landing posts={filteredPosts} />}/>
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
       <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts}/>}/>
