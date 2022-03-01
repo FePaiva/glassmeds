@@ -8,39 +8,49 @@ function Average ({posts, setUser, user}){
   const [averageCost, setAverageCost] = useState (0)
   const uniques = procedures.map(procedure => procedure.procedure)
   .filter((value, index, self) => self.indexOf(value) === index )
-console.log(uniques)
+console.log("unique procedures:", uniques)
 
   
-  console.log("procedure for average:", procedures)
-  console.log("posts for average:", filteredProcedure)
+  console.log("all procedures", procedures)
+  console.log("filtered procedure:", filteredProcedure)
 
 
 
   useEffect(() => {
     fetch(`/posts/${procedures}`)
       .then((r) => r.json())
-      // get rid of duplicates objects before here (filter, reduce, object.assignent). Look for name and index
       .then(setProcedures);
   }, [posts]);
-  // useEffect (() => {
-  //   setFilteredProcedure(procedures)
-  // }, [procedures])
 
-    //  get the filtered procedure array
 
     function handleProcedureChange(procedure) {
       setFilteredProcedure(procedure);
       let filteredObject = procedures.filter (p=> p.procedure === procedure)
-      console.log(filteredObject)
+      console.log("lenght of filtered procedure:", filteredObject)
+      
+      let total = 0;
+      for (let ii = 0; ii < filteredObject.length; ii++) {
+        total = total + filteredObject[ii].patient_cost
+      }
+      console.log("total:", total)
+      let avg = total / filteredObject.length
+      console.log("average:", avg)
+
+
+      // let total = filteredObject.patient_cost.reduce((sum, curr) => sum + curr, 0)
+      // let avg = total /filteredObject.lenght
+      // avg = averageCost
+      // console.log(averageCost)
     }
 
-    const getAverage = filteredObject => {
-    // sum the patient_cost of the filtered procedure
-    const sum = filteredObject.reduce ((total, currentValue) => total + currentValue)
-    // get the length of the filtered procedure array
-    // divide the patient_cost sum by the length of the filtered procedure array
-    return sum / filteredObject.length;
-    }
+
+    // const getAverage = filteredObject => {
+    // // sum the patient_cost of the filtered procedure
+    // const sum = filteredObject.reduce ((total, currentValue) => total + currentValue)
+    // // get the length of the filtered procedure array
+    // // divide the patient_cost sum by the length of the filtered procedure array
+    // return sum / filteredObject.length;
+    // }
     // getAverage(averageCost)
 
     function handleChange(e) {
@@ -56,19 +66,6 @@ console.log(uniques)
   //     return post.procedure === filteredProcedure
   //   }
   // })
-
-   // get the length of the filtered procedure array
-    // divide the patient_cost sum by the length of the filtered procedure array
-
-  
-    //  const getAverage = costArray => {
-    // // sum the patient_cost of the filtered procedure
-    // const sum = costArray.reduce ((total, currentValue) => total + currentValue)
-    // // get the length of the filtered procedure array
-    // // divide the patient_cost sum by the length of the filtered procedure array
-    // return sum / costArray.length;
-    // }
-    // getAverage()
   
 
   return (
@@ -100,22 +97,12 @@ console.log(uniques)
         {uniques.map((procedure) => (
           <option key={procedure} value={procedure}>
             {procedure} 
-            {/* {unique.procedure}  */}
 
           </option>
         ))}
       </select>
           </div>
-          <div>
-          {/* {procedures.map(procedure => {
-            return (
-              <li key={procedure.id}>
-                {procedure.patient_cost}
-              </li>
-            )
-          })} */}
-
-          </div>
+        
           average: {averageCost}
     </div>
   )
