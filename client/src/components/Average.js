@@ -1,6 +1,7 @@
 import Post from './Post';
 import React, { useState, useEffect, useMemo } from "react";
 
+
 function Average ({posts, setUser, user}){
   
   const [procedures, setProcedures] = useState ([])
@@ -10,11 +11,8 @@ function Average ({posts, setUser, user}){
   .filter((value, index, self) => self.indexOf(value) === index )
 console.log("unique procedures:", uniques)
 
-  
-  console.log("all procedures", procedures)
-  console.log("filtered procedure:", filteredProcedure)
-
-
+  // console.log("all procedures", procedures)
+  // console.log("filtered procedure:", filteredProcedure)
 
   useEffect(() => {
     fetch(`/posts/${procedures}`)
@@ -103,7 +101,6 @@ console.log("unique procedures:", uniques)
         ))}
       </select>
           </div>
-        
           Average Patient Cost: $ {averageCost}
     </div>
   )

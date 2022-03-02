@@ -8,8 +8,13 @@ function AddPostForm({ posts, handlePost})
   const uniques = procedures.map(procedure => procedure.procedure)
   .filter((value, index, self) => self.indexOf(value) === index )
 // console.log("unique procedures:", uniques)
-  const uniqFacility = facilities.map(facility => facility.name).filter((value,index, self) => self.indexOf(value) === index)
-  console.log("unique facility:", uniqFacility)
+  // const uniqFacility = facilities.map(facility => facility.name).filter((value,index, self) => self.indexOf(value) === index)
+  // console.log("unique facility:", uniqFacility)
+
+
+  const uniqueList = [...new Map(facilities.map((facility)=> [facility["name"], facility])).values()];
+  console.log("uniqueList", uniqueList)
+
 
   console.log("FACILITIES:", facilities)
   console.log("PROCEDURES:", procedures)
@@ -80,12 +85,12 @@ function AddPostForm({ posts, handlePost})
       <select
         id="facility_id"
         name="facility_id"
-        value={formData.facility_id}
+        value={formData.facility}
         onChange={handleChange}      >
         <option value="">Select Facility</option>
-        {uniqFacility.map((facility) => (
-          <option key={facility.id} value={facility.name}>
-            {facility}
+        {uniqueList.map((facility) => (
+          <option key={facility.id} value={facility.id}>
+            {facility.name}
           </option>
         ))}
       </select>
