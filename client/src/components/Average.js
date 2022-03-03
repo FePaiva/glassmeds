@@ -1,47 +1,56 @@
 import Post from './Post';
-import React, { useState, useEffect } from "react";
-
-
+import React, { useState, useEffect, useMemo } from "react";
 
 
 function Average ({posts, setUser, user}){
   
   const [procedures, setProcedures] = useState ([])
   const [filteredProcedure, setFilteredProcedure] = useState ("")
+  const [averageCost, setAverageCost] = useState (0)
+  const uniques = procedures.map(procedure => procedure.procedure)
+  .filter((value, index, self) => self.indexOf(value) === index )
+console.log("unique procedures:", uniques)
+
+  // console.log("all procedures", procedures)
+  // console.log("filtered procedure:", filteredProcedure)
 
   useEffect(() => {
     fetch(`/posts/${procedures}`)
       .then((r) => r.json())
       .then(setProcedures);
-  }, []);
+  }, [posts]);
 
- // const [averageCost, setAverageCost] = useState([0]) 
-  // const [sumOfPatientCosts, setSumOfPatientCosts] = useState(0)
-  // const [numberOfPatientCosts, setNumberOfPatientCosts] = useState(0)
-  // const procedureAverage = posts.map(post  => { 
-  //   setNumberOfPatientCosts(...numberOfPatientCosts += 1) 
-  //   setSumOfPatientCosts(...sumOfPatientCosts += post.patient_cost) 
-  // })
-
-
-    //  get the filtered procedure array
 
     function handleProcedureChange(procedure) {
       setFilteredProcedure(procedure);
-      console.log(procedure)
+      let filteredObject = procedures.filter (p=> p.procedure === procedure)
+      console.log("lenght of filtered procedure:", filteredObject)
+      
+      let total = 0;
+      for (let ii = 0; ii < filteredObject.length; ii++) {
+        total = total + filteredObject[ii].patient_cost
+      }
+      console.log("total:", total)
+      let avg = total / filteredObject.length
+      console.log("average:", avg)
+      setAverageCost(avg.toFixed(2));
+
+
+      // let total = filteredObject.patient_cost.reduce((sum, curr) => sum + curr, 0)
+      // let avg = total /filteredObject.lenght
+      // avg = averageCost
+      // console.log(averageCost)
     }
 
-    function handleFindProcedure () { 
-      let url = `/posts/${procedures}`
-      if (posts.filteredProcedure ) {
-        url += `procedure=${posts.filteredProcedure}`;
-      }
-      fetch(url)
-      .then((r) => r.json())
-      .then((procedureArray) => {
-        setFilteredProcedure(procedureArray);
-      });
-    }
+
+    // const getAverage = filteredObject => {
+    // // sum the patient_cost of the filtered procedure
+    // const sum = filteredObject.reduce ((total, currentValue) => total + currentValue)
+    // // get the length of the filtered procedure array
+    // // divide the patient_cost sum by the length of the filtered procedure array
+    // return sum / filteredObject.length;
+    // }
+    // getAverage(averageCost)
 
     function handleChange(e) {
       handleProcedureChange(e.target.value);
@@ -56,30 +65,11 @@ function Average ({posts, setUser, user}){
   //     return post.procedure === filteredProcedure
   //   }
   // })
-
-
-
-   // get the length of the filtered procedure array
-    // divide the patient_cost sum by the length of the filtered procedure array
-
-  
-
-  // const getAverage = costArray => {
-  
-
-    // sum the patient_cost of the filtered procedure
-    // const sum = costArray.reduce ((total, currentValue) => total + currentValue)
-    // get the length of the filtered procedure array
-    // divide the patient_cost sum by the length of the filtered procedure array
-    // return sum / costArray.length;
-    // }
-    // getAverage()
   
 
   return (
 
     <div >
-               {/* {posts.map(post => <Post user={user} setUser={setUser} post={post} key={post.id}/>)} */}
 
       {/* <div >
         <select name="filter" onChange={handleProcedureChange}>
@@ -102,26 +92,16 @@ function Average ({posts, setUser, user}){
         name="procedure"
         value={filteredProcedure}
         onChange={handleChange}      >
-        <option value="">Select Procedure</option>
-        {procedures.map((procedure) => (
-          <option key={procedure.id} value={procedure.name}>
-            {procedure.procedure} 
-           {procedure.patient_cost}
+        <option>Select Procedure</option>
+        {uniques.map((procedure) => (
+          <option key={procedure} value={procedure}>
+            {procedure} 
+
           </option>
         ))}
       </select>
           </div>
-          <div>
-          {/* {procedures.map(procedure => {
-            return (
-              <li key={procedure.id}>
-                {procedure.patient_cost}
-              </li>
-            )
-          })} */}
-
-          </div>
-
+          Average Patient Cost: $ {averageCost}
     </div>
   )
 }

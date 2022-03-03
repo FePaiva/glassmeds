@@ -22,7 +22,7 @@ function Post({post}) {
 
   //   if (!isLoaded) return <h2>Loading...</h2>;
 
-console.log(post.procedure)
+console.log("procedure:", post.procedure)
   return (
    
       <div>

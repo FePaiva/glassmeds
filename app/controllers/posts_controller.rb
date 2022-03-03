@@ -2,22 +2,39 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all 
-    render json: posts
+    render json: posts.sort_by{|e| e[:procedure]}
   end
+
+  # def average
+  #   posts = Post.all 
+  #   average = 0
+  #   i = 0
+    
+  #   posts.each do |post|
+  #     i += 1
+  #     average += post.procedure.patient_cost
+  #   end
+  #   byebug
+  #   average = average / i
+  # end
+
+  # MyModel.select(Arel.star, MyModel.arel_table[:patient_cost].avg.as("average_patient_cost")).group(:some_column)
+
 
   def show
     post = Post.find(params[:id]).to_json({only: :procedure})
   end
 
   def create
-    post = current_user.posts.create(post_params)
+    # byebug
+    post = current_user.posts.create!(post_params)
     render json: post, status: :created
   end
 
-  private
+  private   
 
   def post_params
-    params.permit(:user_id, :facility_id, :procedure, :date_of_procedure, :date_of_invoice, :patient_cost, :insurance_cost, :comments)
+    params.require(:post).permit(:user_id, :facility_id, :procedure, :date_of_procedure, :date_of_invoice, :patient_cost, :insurance_cost, :comments)
   end
 
 
