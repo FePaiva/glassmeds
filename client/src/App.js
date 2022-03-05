@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router';
 import './App.css';
-import NavBar from './components/NavBar';
+import NavBarComp from './components/NavBarComp';
 import Landing from './components/Landing';
 import Signup from './components/Signup';
 import Login from "./components/Login";
@@ -9,7 +10,10 @@ import { Routes, Route } from "react-router-dom";
 import AddPostForm from './components/AddPostForm'
 import SearchBar from "./components/SearchBar";
 import Average from "./components/Average";
-import BarChart from "./components/BarChart";
+import Profile from "./components/Profile";
+
+// import BarChart from "./components/BarChart";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -18,7 +22,10 @@ function App() {
   const [posts, setPosts] = useState ([])
   const [filteredPosts, setFilteredPosts] = useState([])
   const [errors, setErrors] = useState(false)
+  // const [isLoaded, setIsLoaded] = useState(false);
 
+  let navigate = useNavigate();
+  
 //   const [userData, setUserData] = useState ({
 //   labels: posts.map((data) => data.facility_id),
 //   datasets: [{
@@ -30,7 +37,7 @@ function App() {
 
   function handleSearch (e) {
     const filteredPosts = posts.filter(post => {
-      return post.procedure.toLowerCase().includes(e.target.value.toLowerCase()) || post.facility.name.toLowerCase().includes(e.target.value.toLowerCase())
+      return post.procedure.toLowerCase().includes(e.target.value.toLowerCase()) || post.facility.name.toLowerCase().includes(e.target.value.toLowerCase()) || post.facility.state.toLowerCase().includes(e.target.value.toLowerCase()) || post.facility.city.toLowerCase().includes(e.target.value.toLowerCase())
     })
     setFilteredPosts(filteredPosts)
   }
@@ -46,6 +53,7 @@ function App() {
         res.json().then((user) => {
           setUser(user);
           setIsAuthenticated(true);
+          // setIsLoaded(true)
         });
         }
       });
@@ -66,10 +74,13 @@ function App() {
         if(data.errors){
           setErrors(data.errors)
         } else {
-          setPosts([...posts, data])
+          setPosts([data, ...posts ])
+          navigate('/')
         }
       })
   }
+  // if (!isLoaded) return <h2>GlassMeds is loading the procedures for you ...</h2>;
+
   // if (!isAuthenticated) return <Login error={'please login'} setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} />;
 
     // useEffect(() => {
@@ -84,16 +95,19 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar setUser={setUser} user={user}  />
-      <SearchBar handleSearch={handleSearch} setUser={setUser} user={user}/>
+      <header> 
+      <NavBarComp setUser={setUser} user={user}  />
+      {/* <SearchBar handleSearch={handleSearch} setUser={setUser} user={user}/> */}
       {/* <BarChart chartData={userData} /> */}
+      </header>
     <Routes> 
 
       <Route path='/average' element = {<Average posts={filteredPosts}/>} />
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
-      <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts}/>}/>
+      <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch}/>}/>
       <Route path="/addpost" element={<AddPostForm setUser={setUser} posts={filteredPosts} user={user} handlePost={handlePost} errors={errors}/>} />
-      <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts}/> : <Landing posts={filteredPosts} />}/>
+      <Route path='/profile' element={<Profile setUser={setUser} user={user}/>}/>
+      <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch}/> : <Landing posts={filteredPosts} handleSearch={handleSearch} />}/>
 
     </Routes>
 
