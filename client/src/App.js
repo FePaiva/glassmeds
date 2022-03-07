@@ -6,12 +6,12 @@ import Landing from './components/Landing';
 import Signup from './components/Signup';
 import Login from "./components/Login";
 import Home from './components/Home';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import AddPostForm from './components/AddPostForm'
 import SearchBar from "./components/SearchBar";
 import Average from "./components/Average";
 import Profile from "./components/Profile";
-
+import EditProfile from "./components/EditProfile";
 // import BarChart from "./components/BarChart";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,19 +21,12 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [posts, setPosts] = useState ([])
   const [filteredPosts, setFilteredPosts] = useState([])
+  const [isUpdated, setIsUpdated] = useState (false)
   const [errors, setErrors] = useState(false)
-  // const [isLoaded, setIsLoaded] = useState(false);
+
+  const {id} = useParams();
 
   let navigate = useNavigate();
-  
-//   const [userData, setUserData] = useState ({
-//   labels: posts.map((data) => data.facility_id),
-//   datasets: [{
-//     label: "Procedures",
-//     data: posts.map((data) => data.procedure)
-//   }]
-// })  
-
 
   function handleSearch (e) {
     const filteredPosts = posts.filter(post => {
@@ -53,7 +46,7 @@ function App() {
         res.json().then((user) => {
           setUser(user);
           setIsAuthenticated(true);
-          // setIsLoaded(true)
+          setIsUpdated(true)
         });
         }
       });
@@ -61,7 +54,8 @@ function App() {
     fetch('/posts')
     .then(res => res.json())
     .then(setPosts);
-  },[]);
+    // setIsLoaded(true)
+  },[isUpdated]);
 
     function handlePost(obj){
       fetch('/posts',{
@@ -71,27 +65,36 @@ function App() {
       })
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         if(data.errors){
           setErrors(data.errors)
         } else {
           setPosts([data, ...posts ])
+          setIsUpdated(!isUpdated)
           navigate('/')
         }
       })
   }
-  // if (!isLoaded) return <h2>GlassMeds is loading the procedures for you ...</h2>;
 
-  // if (!isAuthenticated) return <Login error={'please login'} setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser} />;
+  function handleRemovePost(id) {
+      fetch(`/posts/${id}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+      
+      }).then(setIsUpdated(user.posts.filter((post) => post.id !== (id))));
+  };   
 
-    // useEffect(() => {
-    //   if (user.id) {
-    //    fetch('/posts')
-    //     .then(res => res.json())
-    //     .then(posts => setPosts(posts))
-    //    }
-    //  }, [user])
- 
+    // function handleEditProfile(user){
+    //   fetch(`/users/${id}`, {
+    //     method: 'PATCH',
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: JSON.stringify({user})
+    //   }).then(
+    //     setIsUpdated(isUpdated));
+    //     navigate('/profile')
+    // } 
   
+    
 
   return (
     <div className="App">
@@ -102,11 +105,12 @@ function App() {
       </header>
     <Routes> 
 
-      <Route path='/average' element = {<Average posts={filteredPosts}/>} />
+      <Route path='/average' element = {<Average posts={filteredPosts} setUser={setUser} user={user}/>} />
       <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
-      <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch}/>}/>
+      <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch} />}/>
+      <Route path='/edit' element={<EditProfile setUser={setUser} user={user} setIsUpdated={setIsUpdated} isUpdated={isUpdated} />}/>
       <Route path="/addpost" element={<AddPostForm setUser={setUser} posts={filteredPosts} user={user} handlePost={handlePost} errors={errors}/>} />
-      <Route path='/profile' element={<Profile setUser={setUser} user={user}/>}/>
+      <Route path='/profile' element={<Profile setUser={setUser} user={user} posts={filteredPosts} handleRemovePost={handleRemovePost}/>}/>
       <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch}/> : <Landing posts={filteredPosts} handleSearch={handleSearch} />}/>
 
     </Routes>

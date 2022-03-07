@@ -60,7 +60,7 @@ console.log("unique procedures:", uniques)
       handleProcedureChange(e.target.value);
       console.log(e.target.value)
     }
-
+    if (user) {
   return (
 
     <div  >
@@ -133,7 +133,94 @@ console.log("unique procedures:", uniques)
                       <ProgressBar animated variant="danger" now={mostExpensive} key={3} label={`$${mostExpensive}`} />
                   </ProgressBar>
                   <Card.Text>
-                  {`The average cost for ${filteredProcedure} is $ ${averageCost}. We received ${sameProcedureInstances} GlassMeds users indicating that the most expensive ${filteredProcedure} was $${mostExpensive}, and the cheapest $${lowerCost}`}
+                  <b>{`The average cost for ${filteredProcedure} is $ ${averageCost}. Among the ${sameProcedureInstances} GlassMeds users who shared their cost with us, the most expensive ${filteredProcedure} was $${mostExpensive}, and the cheapest $${lowerCost}`}</b>
+                  </Card.Text>
+                  <Card.Text><b>GlassMeds would like to help other users like you.</b></Card.Text><Card.Link as={Link} to={"/addpost"}><b>Add Your Cost</b></Card.Link> <Card.Text><b>Share your medical cost with us.</b></Card.Text>
+                  {/* <Card.Link href="/login"><b>Login </b></Card.Link> */}
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-primary"><b>Thanks for checking with GlassMeds! </b></small>
+                </Card.Footer>
+              </Card>
+            </Col>
+            </div>
+      </Fade>
+    </Container>
+    </div>
+  )}
+
+  return (
+    <div  >
+      <Container className="App-header"> 
+      {/* style={{ textAlign: 'center'}} */}
+
+      {/* <div >
+        <select name="filter" onChange={handleProcedureChange}>
+          <option value="">Filter by procedure</option>
+          {/* <option value="Produce">Produce</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Dessert">Dessert</option> */}
+        {/* </select> */}
+      {/* </div>
+      <ul className="Items">
+        {procedureToDisplay.map((post) => (
+          <Post key={post.id} name={post.procedure} /> */}
+        {/* ))}
+      </ul>  */}
+
+      <div >
+      {/* <label htmlFor="procedure"><b>Select Procedure:</b></label>
+      <select
+        id="procedure"
+        name="procedure"
+        value={filteredProcedure}
+        onChange={handleChange}      >
+        <option>Select Procedure</option>
+        {uniques.map((procedure) => (
+          <option key={procedure} value={procedure}>
+            {procedure} 
+
+          </option>
+        ))}
+      </select> */}
+      <Form.Group style={{textAlign: "center"}} className="mb-3">
+      <Form.Label htmlFor="procedure"><b>Select Procedure</b></Form.Label>
+      <Form.Select 
+          onChange={handleChange}
+          id="procedure"
+          name="procedure"
+          value={filteredProcedure}
+          onClick={() => setOpen(!open)}
+          aria-controls="example-fade-text"
+          aria-expanded={open}
+          >
+        <option value="">
+          Select Facility
+        </option>
+        {uniques.map((procedure) => (
+          <option key={procedure} value={procedure}>
+            {procedure}
+          </option>
+        ))}
+      </Form.Select>
+    </Form.Group>
+          </div>
+          <Fade in={open}>
+           <div id="example-fade-text">
+            <Col style={{ padding: '2rem' }}>
+              <Card className="mb-3" border="success" style={{ textAlign: 'center', width: '40rem', padding: '1rem' }} >
+                <Card.Img variant="top" src={logo} alt="GlassMeds" width="80px" height="400px" />
+                <Card.Body>
+                  <Card.Title><b>{filteredProcedure}</b></Card.Title>
+                  <Card.Subtitle className="mb-2 text-primary"><b> Average Patient Cost: $</b>{averageCost}</Card.Subtitle>
+                  {/* <ProgressBar striped variant="warning" style={{wordSpacing:"5px"}}now={averageCost} min={lowerCost} max={mostExpensive} label={``}/> */}
+                  <ProgressBar>
+                      <ProgressBar animated variant="success" now={lowerCost}  key={1} label={`$${lowerCost}`} />
+                      <ProgressBar animated variant="warning" now={averageCost} key={2} label={`$${averageCost}`} />
+                      <ProgressBar animated variant="danger" now={mostExpensive} key={3} label={`$${mostExpensive}`} />
+                  </ProgressBar>
+                  <Card.Text>
+                  <b>{`The average cost for ${filteredProcedure} is $ ${averageCost}. Among the ${sameProcedureInstances} GlassMeds users who shared their cost with us, the most expensive ${filteredProcedure} was $${mostExpensive}, and the cheapest $${lowerCost}`}</b>
                   </Card.Text>
                   <Card.Text><b>GlassMeds would like to help other users like you.</b></Card.Text><Card.Link as={Link} to={"/signup"}><b>Signup</b></Card.Link> <Card.Text><b>and share your medical costs with us.</b></Card.Text>
                   {/* <Card.Link href="/login"><b>Login </b></Card.Link> */}
@@ -147,7 +234,8 @@ console.log("unique procedures:", uniques)
       </Fade>
     </Container>
     </div>
-  )
+
+  )     
 }
 
 export default Average;

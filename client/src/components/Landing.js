@@ -16,7 +16,7 @@ function Landing({posts, handleSearch}) {
       <Row> 
         <h2 className="d-flex justify-content-center"> Welcome to Glassmeds!</h2>
         <br></br>
-         <h4 className="d-flex justify-content-start" >GlassMeds' purpose is to bring more transparency to people who need medical treatment and are not sure what to expect in terms of cost. GlassMeds has millions of personalized medical cost information and facilities reviews — all posted anonymously by people in need of medical treatement like you. </h4>  
+         <h4 className="d-flex justify-content-start" >GlassMeds' purpose is to bring more transparency to people who need medical treatment and are not sure what to expect in terms of cost. GlassMeds has personalized medical cost information — all posted anonymously by people in need of medical treatement like you. </h4>  
          <br></br>
          <br></br>
          <br></br>

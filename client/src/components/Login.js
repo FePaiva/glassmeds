@@ -74,15 +74,15 @@ function Login() {
                  onChange={handleChange}
                  />
                 <Form.Text className="text-muted">
-                 GlassMeds will never share any user's personal information with third parties.
+                 Welcome back to GlassMeds.                                    
                 </Form.Text>
             </Form.Group>
             <Button  variant="success" type="submit">
                 Submit
             </Button>
             
-        </Form>
         <p>If you do not have an account, please<Link to="/signup" replace> Signup here</Link> </p>
+        </Form>
         </Container>
   );
 }

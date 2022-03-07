@@ -15,11 +15,11 @@ class UsersController < ApplicationController
         end
     end
 
-    # def create
-    #     user = User.create!(user_params)
-    #     session[:user_id] = user.id
-    #     render json: user, status: :created
-    # end
+    def update 
+        user = get_user
+        user.update!(update_params)
+        render json: user
+      end
 
     def create
         user = User.create(user_params)
@@ -37,6 +37,14 @@ class UsersController < ApplicationController
     def render_unprocessable_entity(invalid)
         render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
+
+    def get_user
+        User.find_by(id: params[:id])
+      end
+    
+      def update_params
+        params.permit(:username, :email, :gender, :race, :state, :city, :insurance)
+      end
 
     def user_params
         params.permit(:username, :email, :password)
