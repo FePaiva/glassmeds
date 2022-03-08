@@ -10,33 +10,41 @@ function Profile ({user, handleRemovePost}) {
 
   return (
   <div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
     <Container> 
    <Card  border="success" > 
-   <Card.Header >User Details</Card.Header>
+   <Card.Header ><b>Profile Card</b></Card.Header>
      <Card.Body>
-        <Card.Title>
+        <Card.Title style={{ textAlign: 'center'}}>
           {user.username}
         </Card.Title>
         <ListGroup className="list-group-flush">
-          <ListGroupItem>Gender: {user.gender}</ListGroupItem>
-          <ListGroupItem>Race: {user.race}</ListGroupItem>
-          <ListGroupItem>State: {user.state}</ListGroupItem>
-          <ListGroupItem>City: {user.city}</ListGroupItem>
-          <ListGroupItem>Insurance: {user.insurance}</ListGroupItem>
+          <ListGroupItem><b> Gender: </b> {user.gender}</ListGroupItem>
+          <ListGroupItem><b>Race: </b> {user.race}</ListGroupItem>
+          <ListGroupItem><b>State:</b> {user.state}</ListGroupItem>
+          <ListGroupItem><b>City: </b>{user.city}</ListGroupItem>
+          <ListGroupItem><b>Insurance: </b>{user.insurance}</ListGroupItem>
         </ListGroup>
         <Card.Body>
-          <Card.Link href="/edit">Edit Profile</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <Card.Link href="/editProfile">Edit Profile</Card.Link>
         </Card.Body>
           </Card.Body>
    </Card>
+  <br></br>
+  <h5 style={{ textAlign: 'center'}}> Thanks for sharing your costs with us. You are helping others like you.</h5>
   <br></br>
    <Row className="g-5" md={2}> 
     {user.posts.map((post) => 
     <div key={post.id}>
     <Card border="success" style={{ textAlign: 'center', width: '40rem', padding: '1rem' }}> 
     <Card.Title>Procedure: {post.procedure}</Card.Title>
-    <Card.Subtitle className="mb-2 text-primary"><b> Facility: </b> {post.facility}</Card.Subtitle>
+    {/* <Card.Subtitle className="mb-2 text-primary"><b> Facility: </b> {post.facility}</Card.Subtitle> */}
     <Card.Subtitle className="mb-2 text-primary"><b> Patient cost: $</b>{post.patient_cost}</Card.Subtitle>
     <Card.Subtitle className="mb-2 text-primary"><b> Insurance cost: $</b>{post.insurance_cost}</Card.Subtitle>
       <Card.Subtitle className="mb-2 text-primary"><b>Date of procedure: </b>{post.date_of_procedure}</Card.Subtitle>
@@ -45,8 +53,8 @@ function Profile ({user, handleRemovePost}) {
         Comments: {post.comments}
      </Card.Text>
      <Card.Body>
-          <Card.Link as={Link} to={"/edit"}>Edit Post</Card.Link>
-          <Button value={post.id} onClick={handleDelete}  >Delete Post</Button>
+          {/* <Card.Link as={Link} to={"/editPost"}>Edit Post</Card.Link> */}
+          <Button variant="outline-danger" value={post.id} onClick={handleDelete}  >Delete Post</Button>
       </Card.Body>
     </Card>
     </div>)}

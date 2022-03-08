@@ -41,6 +41,10 @@ class PostsController < ApplicationController
     end
   end
 
+  # def as_json
+  #   super.merge('created_at' => self.created_at.strftime("%d %b %Y"))
+  # end
+
   private   
 
   def post_params

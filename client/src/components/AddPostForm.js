@@ -60,6 +60,10 @@ function AddPostForm({ posts, handlePost})
     <div >
     <br></br>
     <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
     <h4>Please note that by sharing your costs will help other people to know what to expect in terms of medical costs.</h4>
        <br></br>
         <h3 style={{textAlign: "center"}}>Please add your medical cost here:</h3>

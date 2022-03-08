@@ -6,6 +6,11 @@ function Landing({posts, handleSearch}) {
   return (
     <Container> 
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Row> 
         <Col> 
       <SearchBar handleSearch={handleSearch} />

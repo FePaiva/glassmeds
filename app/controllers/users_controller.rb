@@ -16,9 +16,13 @@ class UsersController < ApplicationController
     end
 
     def update 
-        user = get_user
-        user.update!(update_params)
-        render json: user
+      if current_user
+        # user = get_user
+        current_user.update!(update_params)
+        render json: current_user
+      else 
+        render json: {error: "User not authorized"}, status: :unauthorized
+    end
       end
 
     def create
@@ -32,18 +36,20 @@ class UsersController < ApplicationController
           end
       end
 
+
     private
 
     def render_unprocessable_entity(invalid)
         render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
-    def get_user
-        User.find_by(id: params[:id])
-      end
+    # def get_user
+    #     User.find_by(id: params[:id])
+    #   end
     
       def update_params
-        params.permit(:username, :email, :gender, :race, :state, :city, :insurance)
+        params.permit( :gender, :race, :state, :city, :insurance)
+        # :username, :email,
       end
 
     def user_params

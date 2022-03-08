@@ -6,6 +6,7 @@ import { Card, Row, Col, Container} from 'react-bootstrap';
 function Post({post, user, key, setUser}) {
 console.log("procedure:", post.procedure)
 
+const date = new Date(post.created_at).toString();
 
 
   return (
@@ -30,7 +31,7 @@ console.log("procedure:", post.procedure)
                   {/* <Card.Link href="#"><b>Another Link </b></Card.Link> */}
                 </Card.Body>
                 <Card.Footer>
-                  <small className="text-primary"><b>Posted on: </b>{post.created_at}</small>
+                  <small className="text-primary"><b>Posted on: </b>{date.slice(4, 16)}</small>
                 </Card.Footer>
               </Card>
            

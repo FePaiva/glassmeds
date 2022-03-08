@@ -8,7 +8,7 @@ import Login from "./components/Login";
 import Home from './components/Home';
 import { Routes, Route, useParams } from "react-router-dom";
 import AddPostForm from './components/AddPostForm'
-import SearchBar from "./components/SearchBar";
+import About from "./components/About";
 import Average from "./components/Average";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
@@ -105,14 +105,94 @@ function App() {
       </header>
     <Routes> 
 
-      <Route path='/average' element = {<Average posts={filteredPosts} setUser={setUser} user={user}/>} />
-      <Route path='/signup' element = {(!user) ? <Signup setUser={setUser} /> : <div></div>}/>
-      <Route path='/login' element = {(!user) ? <Login setUser={setUser} setIsAuthenticated={setIsAuthenticated} setUser={setUser}/> : <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch} />}/>
-      <Route path='/edit' element={<EditProfile setUser={setUser} user={user} setIsUpdated={setIsUpdated} isUpdated={isUpdated} />}/>
-      <Route path="/addpost" element={<AddPostForm setUser={setUser} posts={filteredPosts} user={user} handlePost={handlePost} errors={errors}/>} />
-      <Route path='/profile' element={<Profile setUser={setUser} user={user} posts={filteredPosts} handleRemovePost={handleRemovePost}/>}/>
-      <Route path="/" element={user ? <Home setUser={setUser} user={user} posts={filteredPosts} handleSearch={handleSearch}/> : <Landing posts={filteredPosts} handleSearch={handleSearch} />}/>
+          <Route 
+              path='/average' 
+              element = {
+              <Average 
+                posts={filteredPosts} 
+                setUser={setUser} 
+                user={user}
+              />} 
+          />
+          <Route 
+              path='/signup' 
+              element = {
+              (!user) ? 
+              <Signup 
+                setUser={setUser} 
+              /> 
+              : <div></div>}
+          />
+          <Route 
+              path='/login' 
+              element = {
+              (!user) ? 
+              <Login 
+                setUser={setUser} 
+                setIsAuthenticated={setIsAuthenticated} 
+                setUser={setUser}
+              /> : 
+              <Home 
+                setUser={setUser} 
+                user={user} 
+                posts={filteredPosts} 
+                handleSearch={handleSearch} 
+              />}
+          />
+          <Route 
+              path='/editProfile' 
+              element={
+              <EditProfile 
+                setUser={setUser} 
+                user={user} 
+                setIsUpdated={setIsUpdated} 
+                isUpdated={isUpdated} 
+              />}
+          />
+          <Route 
+              path="/addpost" 
+              element={
+              <AddPostForm 
+                setUser={setUser} 
+                posts={filteredPosts} 
+                user={user} 
+                handlePost={handlePost} 
+                errors={errors}
+              />} 
+          />
+          <Route 
+              path='/profile' 
+              element={
+              <Profile 
+                setUser={setUser}
+                user={user} 
+                posts={filteredPosts} 
+                handleRemovePost={handleRemovePost}
+              />}
+          />
+          <Route 
+          path="/about" 
+          element={
+          <About 
+          />} 
+          />
 
+          <Route 
+              path="/" 
+              element={
+              user ? 
+              <Home 
+                setUser={setUser} 
+                user={user} 
+                posts={filteredPosts} 
+                handleSearch={handleSearch}
+              /> : 
+              <Landing 
+                posts={filteredPosts} 
+                handleSearch={handleSearch} 
+              />}
+          />
+          
     </Routes>
 
    

@@ -1,5 +1,6 @@
 // import React from "react";
 import Post from './Post';
+import Profile from './Post';
 import React, { useState, useEffect } from "react";
 import SearchBar from './SearchBar'
 import { Card, Row, Col, Container} from 'react-bootstrap';
@@ -24,9 +25,14 @@ console.log("posts", posts)
   return (
     <Container> 
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Row> 
         <Col> 
-      <SearchBar handleSearch={handleSearch} setUser={setUser} user={user}/>
+      <SearchBar  handleSearch={handleSearch} setUser={setUser} user={user}/>
       <br></br>
        <br></br>
         </Col>
@@ -44,7 +50,7 @@ console.log("posts", posts)
          <br></br>
          <br></br>
          <Row className="g-4" md={2}> 
-         {posts.map(post => <Post user={user} setUser={setUser} post={post} key={post.id}  />)}
+         {posts.map(post => <Post user={user} setUser={setUser} post={post} key={post.id}/> )}
        </Row>
        </Container>
   );

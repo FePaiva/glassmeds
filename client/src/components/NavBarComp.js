@@ -54,7 +54,7 @@ import Signup from './Signup'
     if (user) {
       return (
         
-        <Navbar bg="light" expand="lg">
+        <Navbar fixed="top" bg="light" expand="lg">
           <Container>
           <Navbar.Brand as={Link} to={"/"}><img src={logo} alt="GlassMeds" width="100px" height="100px"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -62,11 +62,13 @@ import Signup from './Signup'
               <Nav className="me-auto">
                 <Nav.Link as={Link} to={"/addpost"}>Add Your Cost</Nav.Link>
                 <Nav.Link as={Link} to={"/average"}>Check Average Costs</Nav.Link>
+                <Nav.Link as={Link} to={"/about"}>About GlassMeds</Nav.Link>
+
 
                 <NavDropdown title="Members" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to={"/profile"}>Profile</NavDropdown.Item>
                   <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                  <NavDropdown.Item href="/">For non-users</NavDropdown.Item>
+                  {/* <NavDropdown.Item href="/">For non-users</NavDropdown.Item> */}
                   {/* <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                 </NavDropdown>
@@ -106,7 +108,7 @@ import Signup from './Signup'
       //                 </Link></h1>
       //     </nav>
       // </div>
-      <Navbar bg="light" variant="light" expand="lg">
+      <Navbar fixed="top"  bg="light" variant="light" expand="lg">
           <Container>
             <Navbar.Brand as={Link} to={"/"}><img src={logo} alt="GlassMeds" width="100px" height="100px"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

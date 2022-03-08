@@ -6,52 +6,54 @@ import { Card, Row, Col, Container, Form, Button, Dropdown, ButtonGroup} from 'r
 // import { Bar } from 'react-chartjs-2';
 
 function EditProfile({user, setUser, setIsUpdated, isUpdated, setErrors, errors, setIsAuthenticated  }) {
-  // const navigate = useNavigate();
-  // const { id } = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  // const [formData, setFormData] = useState({
-  //   gender: "",
-  //   race: "",
-  //   state: "",
-  //   city: "",
-  //   insurance: ""
-  // })
+  const [formData, setFormData] = useState({
+    gender: "",
+    race: "",
+    state: "",
+    city: "",
+    insurance: ""
+  })
 
-  // function handleChange(event) {
-  //   setFormData({
-  //     ...formData,[event.target.name]: event.target.value,
-  //   });
-  // }
+  function handleChange(event) {
+    setFormData({
+      ...formData,[event.target.name]: event.target.value,
+    });
+  }
 
   // function handleSubmit(event) {
   //   event.preventDefault();
   //   handleEditProfile(formData)
   //   };
 
-  // function handleEditProfile(e) {
-  //   e.preventDefault();
-  //   fetch(`users/${user.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(formData),
-  //   }).then((res) => {
-  //     console.log(res);
-  //     if (res.ok) {
-  //       res.json().then((data) => {
-  //         setUser(data.user);
-  //         // setIsAuthenticated(true)
-  //         setIsUpdated(!isUpdated);
-  //       });
-  //     } else {
-  //       res.json().then((data) => {
-  //         console.log(data);
-  //         setErrors(data.errors);
-  //       });
-  //     }
-  //   });
-  // }
+  function handleEditProfile(e) {
+    e.preventDefault();
+    fetch(`users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+
+      if (res.ok) {
+        res.json().then((data) => {
+          setUser(data); 
+          console.log(data);        
+          setIsUpdated(!isUpdated);
+          // setIsAuthenticated(true)
+          navigate('/profile'); 
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data);
+          setErrors(data.errors);
+        });
+      }
+    });
+  }
 
 
   return (
@@ -61,7 +63,7 @@ function EditProfile({user, setUser, setIsUpdated, isUpdated, setErrors, errors,
        <br></br>
         <h3 style={{textAlign: "center"}}>Update Profile</h3>
         <br></br>
-   {/* <Form onSubmit={handleEditProfile}>
+   <Form onSubmit={handleEditProfile}>
     <fieldset enable>
     <Form.Group className="mb-3">
       <Form.Label htmlFor="gender">Gender</Form.Label>
@@ -73,7 +75,7 @@ function EditProfile({user, setUser, setIsUpdated, isUpdated, setErrors, errors,
         >
           <option value="">
             Gender
-            </option>
+          </option>
           <option>Female</option>
           <option>Male</option>
           <option>Other</option>  
@@ -98,7 +100,7 @@ function EditProfile({user, setUser, setIsUpdated, isUpdated, setErrors, errors,
           <option >White</option>
           <option >Prefer not to disclose</option>
           <option >Not listed here</option>
-\      </Form.Select>
+      </Form.Select>
     </Form.Group>
     <Form.Group className="mb-3">
       <Form.Label htmlFor="state"><b>State</b></Form.Label>
@@ -183,9 +185,10 @@ function EditProfile({user, setUser, setIsUpdated, isUpdated, setErrors, errors,
       placeholder="N/A if you do not have insurance." 
       />
     </Form.Group>
-    <Button variant="success" type="submit">Submit</Button>
+     <Button  variant="success" type="submit">Submit</Button>
+     {/* href="/profile"> */}
   </fieldset>
-</Form> */}
+</Form>
 
 
  </Container>

@@ -62,6 +62,11 @@ function handleSubmit(e) {
 
                 <div>
                 <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <h1 style={{textAlign: "center"}}>Sign Up </h1>
          <Form  onSubmit={handleSubmit} >
             <Form.Group className="mb-3" controlId="formUsername" >  
