@@ -168,6 +168,7 @@ function App() {
                 user={user} 
                 posts={filteredPosts} 
                 handleRemovePost={handleRemovePost}
+                errors={errors}
               />}
           />
           <Route 

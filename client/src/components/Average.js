@@ -88,7 +88,7 @@ console.log("unique procedures:", uniques)
           aria-expanded={open}
           >
         <option value="">
-          Select Facility
+          Select Procedure
         </option>
         {uniques.map((procedure) => (
           <option key={procedure} value={procedure}>
@@ -182,7 +182,7 @@ console.log("unique procedures:", uniques)
           aria-expanded={open}
           >
         <option value="">
-          Select Facility
+          Select Procedure
         </option>
         {uniques.map((procedure) => (
           <option key={procedure} value={procedure}>

@@ -119,8 +119,8 @@ import Signup from './Signup'
                 {/* <Route path='/signup' component={Signup}/> */}
                 <NavDropdown title="Not a member?" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to={"/signup"}>Sign Up</NavDropdown.Item>
-                  <NavDropdown.Item href="/about">About GlassMeds</NavDropdown.Item>
-                  <NavDropdown.Item href="/facilities">For Facilities</NavDropdown.Item>
+                  <NavDropdown.Item href="/about">Why GlassMeds?</NavDropdown.Item>
+                  {/* <NavDropdown.Item href="/facilities">For Facilities</NavDropdown.Item> */}
                   {/* <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                 </NavDropdown>
