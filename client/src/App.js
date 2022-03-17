@@ -12,9 +12,9 @@ import About from "./components/About";
 import Average from "./components/Average";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
-// import BarChart from "./components/BarChart";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+// import GoogleMapComponent from "./components/GoogleMapComponent";
+import { GoogleMap } from "@react-google-maps/api";
 
 function App() {
   const [user, setUser ] = useState(null)
@@ -130,7 +130,6 @@ function App() {
               <Login 
                 setUser={setUser} 
                 setIsAuthenticated={setIsAuthenticated} 
-                setUser={setUser}
               /> : 
               <Home 
                 setUser={setUser} 
@@ -152,6 +151,7 @@ function App() {
           <Route 
               path="/addpost" 
               element={
+              
               <AddPostForm 
                 setUser={setUser} 
                 posts={filteredPosts} 

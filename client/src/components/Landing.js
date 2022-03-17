@@ -30,8 +30,7 @@ function Landing({posts, handleSearch}) {
          </Row>
          <br></br>
          <br></br>
-         <Row className="g-4" md={2}> 
-         {posts.map(post => <Post post={post} key={post.id} />)}
+         <Row className="g-4" md={2}> {posts.map(post => <Post post={post} key={post.id} />)}
        </Row>
        </Container>
   );
