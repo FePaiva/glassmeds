@@ -64,10 +64,10 @@ function AddPostForm({ posts, handlePost})
 
     const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
-      googleMapsApiKey: "AIzaSyB0ERQhHbX2usywDPXZPjo2E_QrBohanyA",
+      googleMapsApiKey: process.env.API_KEY,
       libraries: ['places']
     })
-    
+    console.log(process.env);
     const [map, setMap] = useState(/** @type google.maps.Map */ (null))
     
     if(!isLoaded) {

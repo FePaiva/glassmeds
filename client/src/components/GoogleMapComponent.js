@@ -14,7 +14,7 @@
 
 // function GoogleMapComponent() {
   // const { isLoaded } = useJsApiLoader({
-  //   googleMapsApiKey: "AIzaSyB0ERQhHbX2usywDPXZPjo2E_QrBohanyA",
+  //   googleMapsApiKey: "",
   //   libraries: ['places']
   // })
 
