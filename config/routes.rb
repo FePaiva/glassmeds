@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/users/:id/posts/:procedures', to: 'users#post'
   get '/users/:id/posts', to: 'users#posts'
   get '/average', to: 'posts#average'
+  # get '/me', to: 'users#me'
 
 
   # post '/users', to: 'users#create'

@@ -26,10 +26,24 @@ class PostsController < ApplicationController
   end
 
   def create
-    # byebug
+    byebug
     post = current_user.posts.create!(post_params)
     render json: post, status: :created
   end
+
+  def destroy
+    post = Post.find_by(id:[params[:id]])
+    if post
+      post.destroy
+      head :no_content
+    else
+      render json: {error: "Post not found"}, status: :not_found
+    end
+  end
+
+  # def as_json
+  #   super.merge('created_at' => self.created_at.strftime("%d %b %Y"))
+  # end
 
   private   
 

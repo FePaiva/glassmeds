@@ -1,6 +1,7 @@
-import NavBar from "./NavBar";
+import NavBarComp from "./NavBarComp";
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
+import { Card, Row, Col, Container, Form, Button} from 'react-bootstrap';
 
 function Login() {
 
@@ -39,8 +40,15 @@ function Login() {
     }
 
   return (
-    <>
-    <h2>Please Login here</h2>
+    <Container className="App-header"> 
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <h1 style={{textAlign: "center"}}>Login </h1>
+    {/* <h2>Please Login here</h2>
     <form onSubmit={handleSubmit}>
       <label>Username</label>
       <input type="text" name="username" value={formData.username} onChange={handleChange}/>
@@ -49,11 +57,38 @@ function Login() {
       <input type="password" name="password" value={formData.password} onChange={handleChange}/>
     <br/>
     <button>Login</button>
-    </form>
-    <p>If you do not have an account, please<Link to="/signup" replace> Signup here</Link> </p>
+    </form> */}
+   
 
-    
-    </>
+    <Form  onSubmit={handleSubmit} >
+            <Form.Group className="mb-3" controlId="formUsername" >  
+                <Form.Label> Username</Form.Label>
+                <Form.Control 
+                name="username"
+                type="text" 
+                placeholder="Username" 
+                onChange={handleChange}
+                />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formPassword"> 
+                 <Form.Label> Password</Form.Label>
+                 <Form.Control 
+                 name="password"
+                 type="password" 
+                 placeholder="Enter password" 
+                 onChange={handleChange}
+                 />
+                <Form.Text className="text-muted">
+                 Welcome back to GlassMeds.                                    
+                </Form.Text>
+            </Form.Group>
+            <Button  variant="success" type="submit">
+                Submit
+            </Button>
+            
+        <p>If you do not have an account, please<Link to="/signup" replace> Signup here</Link> </p>
+        </Form>
+        </Container>
   );
 }
 
